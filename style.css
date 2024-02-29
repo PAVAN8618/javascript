@@ -1,0 +1,25 @@
+body{
+    background: rgb(17, 142, 151);
+    color: aquamarine;
+    margin:0px 0px;
+    box-sizing: border-box;
+
+   
+}
+
+.container{
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    
+}
+
+.inner{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+
+}
+
+

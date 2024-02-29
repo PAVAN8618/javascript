@@ -1,0 +1,40 @@
+body{
+    background: #174a82;
+    color: aliceblue;
+
+}
+.outer-box{
+    width: 100vh;
+    height: 100vh;
+    border-radius: 17px;
+    
+    
+}
+.inner-box{
+    
+    width: 400px;
+    margin: 0 auto;
+   
+    position: relative;
+      top: 50%;
+    background: #b84dad;
+    padding: 20px 40px;
+    transform: translateY(-50%);
+    border: #dde0e3 ;
+    
+}
+.signup-header h1{
+    font: 2.3em sans-serif;
+    
+}
+.signup-body p{
+    font: 2rem;
+    padding: 5px;
+}
+.signup-body p input{
+    height: 12px;
+    width: 100%;
+    margin: 5px;
+    border: 2px solid blanchedalmond
+}
+
