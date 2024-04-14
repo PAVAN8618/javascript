@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Canvas Application</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="200"></canvas>
+    <button id="resetBtn">Reset</button>
+
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        // Define circle positions
+        var circlePositions = [
+            { x: 50, y: 100 },
+            { x: 150, y: 100 },
+            { x: 250, y: 100 },
+            { x: 350, y: 100 }
+        ];
+
+        // Define colors for circles
+        var circleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00'];
+
+        // Arrow positions
+        var arrowPositions = [
+            { x: 50 + 30, y: 100 }, // Initial arrow positions corresponding to circles
+            { x: 150 + 30, y: 100 },
+            { x: 250 + 30, y: 100 },
+            { x: 350 + 30, y: 100 }
+        ];
+
+        // Draw circles and arrows
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw circles
+            for (var i = 0; i < circlePositions.length; i++) {
+                var circle = circlePositions[i];
+                var color = circleColors[i];
+
+                ctx.beginPath();
+                ctx.arc(circle.x, circle.y, 30, 0, 2 * Math.PI);
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+
+            // Draw arrows
+            for (var i = 0; i < arrowPositions.length; i++) {
+                var arrow = arrowPositions[i];
+                var circle = circlePositions[i];
+                var dx = circle.x - arrow.x;
+                var dy = circle.y - arrow.y;
+                var distance = Math.sqrt(dx * dx + dy * dy);
+                var speed = 2; // Adjust speed as needed
+
+                if (distance > speed) {
+                    arrow.x += dx / distance * speed;
+                    arrow.y += dy / distance * speed;
+                } else {
+                    arrow.x = circle.x;
+                    arrow.y = circle.y;
+                    circleColors[i] = getRandomColor(); // Change color upon hitting circle
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(arrow.x, arrow.y - 5);
+                ctx.lineTo(arrow.x + 40, arrow.y - 5);
+                ctx.lineTo(arrow.x + 30, arrow.y - 10);
+                ctx.moveTo(arrow.x + 40, arrow.y - 5);
+                ctx.lineTo(arrow.x + 30, arrow.y);
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        // Start animation loop
+        draw();
+
+        // Event listener for mouse click
+        canvas.addEventListener('click', function (event) {
+            var mouseX = event.clientX - canvas.getBoundingClientRect().left;
+            var mouseY = event.clientY - canvas.getBoundingClientRect().top;
+
+            for (var i = 0; i < circlePositions.length; i++) {
+                var circle = circlePositions[i];
+                var dx = mouseX - circle.x;
+                var dy = mouseY - circle.y;
+                var distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance <= 30) { // If clicked inside circle
+                    arrowPositions[i].x = circle.x;
+                    arrowPositions[i].y = circle.y;
+                    break;
+                }
+            }
+        });
+
+        // Reset button event listener
+        document.getElementById('resetBtn').addEventListener('click', function () {
+            circleColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00'];
+            arrowPositions = [
+                { x: 50 + 30, y: 100 },
+                { x: 150 + 30, y: 100 },
+                { x: 250 + 30, y: 100 },
+                { x: 350 + 30, y: 100 }
+            ];
+        });
+
+        // Function to generate random color
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+
+</html>

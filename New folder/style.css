@@ -1,0 +1,30 @@
+.main {
+}
+.one {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  border-radius: 50px;
+  margin: 10px;
+}
+.two {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  border-radius: 50px;
+  margin: 10px;
+}
+.three {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 50px;
+  margin: 10px;
+}
+.four {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  border-radius: 50px;
+  margin: 10px;
+}
